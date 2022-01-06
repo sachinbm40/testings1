@@ -1,0 +1,19 @@
+AWS (Amazon web services)
+
+AWS is Amazons cloud web hosting platform that offers flexible, relabel, scalable, easy to use cost effective solutions.
+
+Cloud computing:- It is term refereed to storing and accessing data over the Internet.
+
+3 type of cloud services
+1. private cloud :- it is a dedicated to single telnet, also dedicated to hardware and security (use with in company).
+2. Public cloud :- Its shared with multiple telnet and access over interment. (ex :- AWS, GCP, assure, alli bhaba)
+3. Hybrid cloud :- Hybrid cloud is a combination of both public and private cloud it is most successful cloud practice ex :- open stake vm ware.
+
+
+Is an application configuration making the private cloud into public cloud
+
+
+3 type of services
+1. IAAS (Infra structure as a services)
+2, PAAAS (platform as a service)
+3. SAAS (software as a services)

@@ -1,0 +1,284 @@
+Docker 
+
+Docker is PAAS That allows you to build test and deploy application quickly.
+
+
+Docker image:- Application, code configurations and dependencies are packaged into a single file is called Docker Image.
+Docker Images are created by Docker file.
+
+Dockerfile:- Set of instructions used create image 
+
+
+Docker container :- It is a group of Isolated process. It is a instance or server for that application.
+
+NOTE(imp) :- Can we have install docker on windows ?
+No we canot install Docker as core software or a program but docker as a provided way to install on windows as Docker desktop.
+When we install Docker desktop, It will a automatically spin a Linux virtual machine in window(oracle VM).
+
+
+How docker or container work internally ?
+What are Group and Name spaces and how it is related to docker?
+What is linux container?
+
+In a Normal virtualized environment one or more VM run on top of physical machine using a hyper-wiser like zen Hyper wiser.
+
+
+Container or Docker uses linux kernal futures like name space,contro group(C Group), CH route to create container top of operating system, and automate application deployment on container. 
+
+containers are Isolated in a host using 3 Linux kernel futures  
+name sapce
+c group 
+ch root
+
+Name space:- Process Isolation from separation from other process which is achieved from default linux future called as name space.
+				Name spaces help us to separate and group some process from other process.
+				some name spaces are pid,ufs(isolated kernal and version identifier),GID, C group,net(network interpases), IPC, mount, user et.....
+
+C group(resource limiter):- C group will help us to control the access, creation deltion of files, The resources used by conatiners used by 				
+we can deside o how much cpu and memory resources a container should used using C Group, CPU, Memory(ram), sockets(port), devices(usb).			
+
+
+ch root :- It will create root directory.
+
+
+
+Have you haver created or changed C group in a container ?
+In our company we have not changed any defult charctersticks but I have worked with C group which are created defualt by Docker.
+
+How Docker will limit the resource to container?
+Using C group
+ex:- CPU, Memory(ram), sockets(port), devices(usb).
+
+
+
+
+Docker file Instruction
+
+FROM :- It pulls the base image
+
+scratch image :- It is the most minimal image in docker.this is the base ansister for all other images.
+The scratch image is actuly empty 
+
+alpine is base image is the smallest base image that is of 5 mb
+
+WORKDIR :- it is similar to cd, to define working directory for an application we used work dir /var/lib/jenkins
+
+
+RUN :- It is used to update the image and commit and also used to run command and commit it.
+
+ENV :- it used to set the environmental variables for docker file.
+
+ARG(Argument) :- we passed the value during building the docker image 
+
+
+Difference b/w ENV and ARG
+
+ARG- 
+Values are available in docker file during building the docker image
+values are not available after image is built or running container won’t have access.
+
+ENV- 
+It is mainly meant to provide default values for your future environment variables.
+Running docker applications can access environment variables. 
+It is a great way to pass configuration values to your project.
+-e – environmental variable for container which can be accessed anywhere inside container.
+
+
+CMD :- It is the default command run when new container starts.
+
+ENTRY SPOT :-It is the default command run when new container starts.
+
+
+
+Diff CMD and ENV-
+
+When both commands are present CMD becomes argument to entry point we can over-right CMD at run time, we cant over right entry point.
+
+
+Can we have two or more CMD and ENV
+
+Yes but it consider lat entry point only , ignore the rest of the things
+
+
+EXPOSE
+
+It is used to make port available for all container in same cluster 
+
+PUBLISH :- Publish is used to map inside container to the port of host machine, where the same container is in run.
+
+MAINTAINER :- Use the name of the user for maintains the image (will give after from).
+
+COPY :- Instruction will copy new file from source path to container path file system.
+
+
+ADD:- add will do the same thing ass copy, but ADD alows us to use URL tar zip file as a source file, while executing extract the data and copy.
+
+
+Docker build: it is a command used to build the images
+Syntax: docker build -t  <image name> . or docker build -t  <image name>:<tag> .         -------- (docker build -t myubuntuimg .)
+Or docker build -t  <image name> -f  Dockerfile
+
+
+Docker run: it is a command used to create the container from the image
+Syntax: docker run  -it <image name>:<tag> 
+-it : interactive mode
+-d: detached mode
+
+
+
+
+
+************
+05-01-22
+
+Docker engine is called aas Docker demon, it is the kernal of the docker 
+
+Docker images
+It is a command used to list all the images exists in a local machine.
+
+Docker ps
+It is used list running containers in local machine.
+
+Docker ps -a
+it is used list all the containers in local machine.
+
+****wriiten lat**
+
+Docker build: it is a command used to build the images
+Syntax: docker build -t  <image name> . or docker build -t  <image name>:<tag> .
+Or docker build -t  <image name> -f  Dockerfile
+
+Docker run: it is a command used to create the container from the image
+Syntax: docker run  -it <image name>:<tag> 
+-it : interactive mode
+-d: detached mode
+
+Remove specific docker img
+docker rmi -f <container_id>
+
+
+Remove container  in docker 
+docker rm -f <doker_id>
+
+How do i know images uses which ports
+By using docker hub documentation i will come to know image is using which port 
+
+Port mapping
+It will inform the docker demon to associate port of container to the host machine
+There are 2 ways:
+1.	-p: It maps individual port of container to the port of host machine. 
+Example: -p  <hostport>:<containerport>
+-p 8888:8080
+2.	-P: All ports of container is used to same port of the host machine.
+Example: docker run -it <imageid> -P
+
+Docker Exec
+It is used to get inside the running container
+Syntax: docker exec -it <container id> /bin/bash (without /bin/bash I can give just “bash” as well)
+
+
+Without base image how to create an image ? or how to create own image or base image ?
+FROM scratch, it dosnot pull any images base images will be empty 
+
+
+Volume and binds / type of layers / types of volumes 
+
+Docker containers dosnot store persistance data any dat written to persistance layer will no longer be available once the container stops running.
+
+To solve the problem of persistance data from containers docker as 2 items 
+1.Volumes 
+2.Bind mount 
+
+
+Bind mount:-It is file or a folder stored any where on container host file system, mounted into a running file system.
+It exists in host machine so process outside of doker can also modified it 
+
+Note :- Dis advantages
+Non docker process on docker host or docker container can modified the data at any time 
+Syntax: -v hostmachinefile/folderpath:containerfile/folderpath
+
+
+Volumes:-
+
+Single volume can be attached to multiple containers, volumes are maintained by docker hub no can access the volume outside the container this is mountable entity used to store persistence data
+Volumes are stored in host file system but which is managed by docker but non docker process should not modify this part of the file system
+
+Volume creation syntax
+
+docker volume create volume_name
+
+
+Docker inspect
+If you want to get more information or details of containers or volume we use docker inspect
+
+syntax :- Docker inspect container_id or volume_id
+
+To mount the volume syntax **********
+
+
+Docker login :- docker login -u
+
+docker login -u <user name> -p <password> -h <docker registry name>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tomcat use catelina server
+
+name space provide isolation assiging group id, pid , c group (control group name space)
+
+linux futures 
+name sapce
+c group 
+ch root
+
+run application a container in docker, In linux we run in Linux)
+
+
+In AWS nitro hyper wiser 
+***********/
+
+
+FROM ubuntu:20.04
+RUN mkdir -p /home/test/first
+RUN apt update
+ENV sachin /home/test/first
+CMD ["/bin/bash"]
+
+
+
+$ docker build --build-arg some_variable_name=a_value
+
+docker build -t ubuntuimage:new1.3 --build-arg AKSHAY_PATH=/home/test/New .
+
+
+
+
+base img should be ubunt perl telnet (before update)
+
+set arg env var 
+
+
+

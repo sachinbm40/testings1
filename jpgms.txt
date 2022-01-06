@@ -1,0 +1,145 @@
+#3) Write a Java Program to swap two numbers using the third variable.
+ import java.util.Scanner;
+ 
+public class SwapTwoNumbers {
+ 
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        int x, y, temp;
+        System.out.println("Enter x and y");
+        Scanner in = new Scanner(System.in);
+        x = in.nextInt();
+        y = in.nextInt();
+        System.out.println("Before Swapping" + x + y);
+        temp = x;
+        x = y;
+        y = temp;
+        System.out.println("After Swapping" + x + y);
+         
+    }
+ 
+}
+Output:
+
+Enter x and y
+45
+98
+Before Swapping4598
+After Swapping9845
+
+#4) Write a Java Program to swap two numbers without using the third variable.
+
+import java.util.Scanner;
+  
+class SwapTwoNumberWithoutThirdVariable
+{
+   public static void main(String args[])
+   {
+      int x, y;
+      System.out.println("Enter x and y");
+      Scanner in = new Scanner(System.in);
+  
+      x = in.nextInt();
+      y = in.nextInt();
+  
+      System.out.println("Before Swapping\nx = "+x+"\ny = "+y);
+  
+      x = x + y;
+      y = x - y;
+      x = x - y;
+  
+      System.out.println("After Swapping without third variable\nx = "+x+"\ny = "+y);
+   }
+}
+Output:
+
+Enter x and y
+45
+98
+Before Swapping
+x = 45
+y = 98
+After Swapping without a third variable
+x = 98
+y = 45
+
+
+
+
+Revers string
+
+ 
+import java.io.*;
+import java.util.Scanner;
+ 
+public class rstr
+{
+    public static void main (String[] args) 
+	{
+       
+        String input= "Malyalam";
+		String output= "";
+       
+	   for(int i=input.length()-1; i>=0; i--)
+	   
+			output=output + input.charAt(i);
+	  System.out.println(output);
+	   
+	   
+	}
+}
+
+
+
+Palindrom or not 
+
+public class pal
+{
+    public static void main (String[] args) 
+	{
+       
+        String input= "Malyalam";
+		String output= "";
+       
+	   for(int i=input.length()-1; i>=0; i--)
+	   
+		{
+		output=output + input.charAt(i);
+	  System.out.println(output);
+		}
+		
+		if(input.equals(output))
+	   {
+			System.out.println("String is palindrom");
+	   }
+	   else
+	   {
+				System.out.println("String is palindrom");
+	   }
+	}
+}
+
+
+Revwers a word in string
+
+public class pal
+{
+    public static void main (String[] args) 
+	{
+       
+        String str= "My name is sachin";
+		String a[] = str.split(" ");
+       
+	   for(int i=0; i<a.length; i++)
+	   
+		{
+			System.out.print(a[i] + " ");
+		}
+		
+		System.out.println("");
+	for(int i=a.length()-1; i>=0; i--)
+		{
+			System.out.print(a[i] + " ");
+		}
+		
+		

@@ -1,0 +1,290 @@
+18-12-2021
+
+Jenkins
+
+in ubuntu repo path is  /etc/apt/sources.list.d/
+
+sentos redhat /etc/yum.repos.d/
+
+
+How to change the port numbers in jenkins
+Path is /etc/default/jenkins file change the port number in the line HTTP_PORT=8080 by any other port number
+
+http://3.144.86.199:8080/github-webhook/
+
+
+
+
+
+
+
+1 Install Jenkins (https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-20-04)
+
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+sudo apt update
+
+sudo apt install jenkins
+
+sudo systemctl start jenkins
+
+sudo systemctl status jenkins  :- jenkins service should be active 
+
+Note :- please make sure jenkins is using port 8080 if any other services are using change that service to other port first 
+
+
+Jenkins :- /etc/default/jenkins
+
+in browser :- <public_ip>:8080
+
+note :- provide requiered user name and other details to install jenkins pugins 
+
+
+https://github.com/sachinbm40/sachinj.git
+
+Continues integration
+Integrate the changes from development team continuously with out manual intervention we can give quick feedback to developers for there change.
+
+Continues Deployment
+Tested build should be deployed to prod environment as early as possible.
+
+Continues Delivery 
+Each change from dev team should be build, and deployed to test environment to test the changes.
+
+
+How do you configure job 
+
+Go to dashboard, click on new item select type of job, click on ok.
+Go to configure page, in source code management tab type the git url and select credentials, 
+In build trigger select trigger method to build the job
+In build tab mentioned the command to build the project
+In post build action:- used to trigger post build actions it may be deployment, sending email, triggering other jobs, and running test cases.
+
+Default path of jenkins (port 8080)
+/var/lib/jenkins/
+
+maven gradel 
+
+Types of build triggers 
+
+Build periodically :- It will trigger the jenkins job based on time. Whether commit or no commit.
+
+poll SCM :-It will trigger jenkins job based on commit. If there are any commit with in specified time it will trigger jenkins job.
+
+Webhooks :- As soon as the changes push to the repo, It will trigger jenkins job.
+
+
+
+How do you trigger jenkins job based on commit :- using webhooks 
+
+Note :-
+Normally we will never run the jobs on master. We will run jobs on slaves.
+In our comapny we are using 10 to 15 slaves.
+we will use labels to run the jobs.
+
+
+Why slaves machines are required ? (master slaves)
+Master slaves are used distrubute load on diffrent servers and also we can run specific job on specific servers.
+Example:-
+I can compile the  java source code on server which provides the java enviornments only.
+
+
+
+How do you secure jenkins ?
+We use metric based security it provides check boxes, which ever the boxes we check user will have those permission.
+
+Note:-3 Types of methods to secure jenkins
+metric based security 
+role based security
+
+
+Click on manage jenkins configure global security select metrix based security in authorization tab.
+Add the user by cliccking on add 
+select the check boxs which haver you want to give access and click on save
+
+
+How to add the user?
+Manage jenkins -> manage user and click on create user enter the user details and click on save.
+
+
+How to install the plugins ?
+go to manage jenkins, manage plugins in advanced tab upload a pulgin file and click on without restart.
+we need to download jenkins plugin file from jenkines update center(jenkins.io)
+ 
+ 
+1. Parameterized plug-in :- it is used to pass permeter to jenkins job, I configured Parameterized plugin for deployment job, deployment as 2 permeter one is server name and another one is build number this values will be pass to deployments scripts inside jenkins job.
+
+2. gearman plugin :- it is avilabelity plug in if jenkins master gose down jenkins will be up and runnig automaticaly on other servers. Geerman funcation will allow us add other server details. When jenkins on running on first master bothe the server will be in sync. 
+ 
+ as soon as the jenkins master gose down it will be up and running on other server. 
+ 
+ 
+ Publish war cifs :- It is used to copy the war from linux to windows 
+ 
+ 
+ SonarQube scanner :- It is used to check the quality of source code, If quality odf source code is more than 70 % then we consider quality of source cod eis good.
+
+up stream
+down stream 
+quality gate
+artifectory (nexes)
+maven
+gradel
+docker pipe line
+git plugin (default installed)
+CVS
+paramitarized plugin ******
+paramitarized trigger *****
+
+
+
+sudo useradd -d /home/slave-1 -m slave-1
+sudo su - slave-1
+ssh-keygen -t rsa -N " " -f /home/slave-1/.ssh/id_rsa
+cd .ssh
+cat id_rsa.pub > authorized.keys
+chmod 700 authorized.keys
+
+
+master
+mkdir -p /var/lib/jenkins/.ssh
+cd /var/lib/jenkins/.ssh
+ssh-keyscan -H 172.31.38.198 >>/var/lib/jenkins/.ssh/known-hosts
+chown jenkins:jenkins known-hosts
+chmod 700 known-hosts
+
+
+
+Jenkins file (jenkine pipeline)
+It is a file where we put all our job configuration to achieve to multiple instance execution in single pipe line job. By defualt it will take one executor until  unless we configure more executer. Groovy script is used write the jenkins files.
+
+2 Types.
+
+1. Declarative pipeline
+2. Scripted pipeline
+
+
+groovy script https://www.jenkins.io/doc/book/pipeline/syntax/
+
+Declarative pipeline :-
+
+{
+}
+
+
+agents :- it is a block which is used to define which jobs used to run in which machine.
+agent have 4 types
+1. any :- It is always defined at the pipeline level we can't define . It will run the job on any available agent based on load.
+
+syntax:-agent any 
+
+2. Docker :- Here we will mentioned the image name to 
+
+3. None :-If we define agent as noon at pipeline level then it is mandatory to define agent at stage level.
+
+4. Label :-It is used to run the job on a particular slave
+syntax :- agent{label'java'}
+
+declarative pipeline
+
+
+
+whoami
+su - jenkins
+vi /etc/sudoers
+%wheel ALL=(ALL) NOPASSWD: ALL (after root)
+
+
+
+
+
+
+
+How do you take jenkins backup?
+We need to take backup from the path /var/lib/jenkins. We take jenkins backup and stored it in seperate repository. We have return a script to do this automaticaly and scheduled in cron tab.
+
+How do you copy jobs from one jenkin server to another server ?
+Copy the job under /var/lib/jenkins to another jenkins server in same path.
+
+Can we make slave acting as its own master?
+NO
+
+How jobs will select slave machine to run? OR How jenkins will distrubutes load to slave machine ?
+Using Smart scence pulgin it will run the jobs based on
+1.Capacity is more (memory).
+2.No of jobs passed.
+
+how to define each job in different slaves?
+Using agent labels
+
+What kind of issues you faced while building?
+once the build is broken we need to debug and identified the files why build is broken.
+
+2 type of issues
+
+1. Compilation issue :- We need to work with developers.
+2. Environment issue :- If it is a build enviornments issue we need to debug and fix. Environment issue may be any one of the fallowing.
+	* Memory is full on server
+	* CPU usage is high on the server
+	* slave machine is not available in jenkins (slave is down)
+	* dependency issue (dependancy is not installed)
+	* Version missmatch
+	
+
+
+In link parallel 
+
+how to add the slaves to the jenkins master
+
+how you monitor the jenkins slaves
+
+
+
+pipeline {
+    agent { label 'java' }
+    stages {
+        stage('checkout') {
+            steps {	
+	sh 'git pull https://github.com/sachinbm40/hello-world-war.git'	
+              }
+        }
+	
+	 stage('build') {
+            steps {	
+	sh 'mvn clean package'	
+              }
+        }
+	 stage('print') {
+            steps {	
+	sh 'echo "hello world"'	
+              }
+        }    
+	    stage('deploy'){
+steps{
+sh 'echo "giving sudo permission for jenkins folder"'
+sh 'cp -R /home/slave-3/jenkins/workspace/test_pipline_job/target/hello-world-war-1.0.0.war /opt/apache-tomcat-9.0.56/webapps'
+}
+}
+    }
+}
+
+
+stage('deploy'){
+steps{
+sh 'echo "giving sudo permission for jenkins folder"'
+sh 'sudo chmod -R 0777 /opt'
+sh 'cp -R /home/jenkins/workspace/ppjava/target/hello-world-war-1.0.0 /opt/apache-tomcat-9.0.56/webapps'
+}
+}
+
+
+
+node("java") {
+    
+    stages {
+	
+        stage('checkout') {
+            steps {	
+	sh 'git clone https://git

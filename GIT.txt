@@ -1,0 +1,380 @@
+GIT
+git is a version control tool used to keep track the version of files and directories 
+
+git init :- used initialize the git repositorie 
+git --version:- Used to know the version of a git 
+
+how to configure a user for git repo 
+git config --global user.name "sachinbm"
+git config --global user.email "sachinbm40@gmail.com"
+
+
+git architecture(git flow)
+
+
+there are 3 stages 
+1 workspace :- It a place where we edit the project related files.
+2 Stagging area :- It is intermediate area where we save the changes 
+3 gitrepo :- version of files tracked after,  running git commit files will be moved to gitrepo. 
+
+ git status :- It is used to check whether the files are in workspace or in stagging area or in git repo 
+ 
+ git add repo :- It is used to move the files from workspace to the stagging  area 
+ 
+ git add file_name
+ git add .
+ 
+ 
+ git commit :- It is used to move the files from stagging area to git repo locally.
+ 
+ git commit -m "message" 
+ 
+ 
+ git clone :- It is used to bring the central repo to the local repo the first time 
+ git clone url
+ 
+ git pull :- It will bring the changes from the remote repo and merges to the local workspace automatically 
+ 
+ git pull url
+ 
+ 
+ git push :- It is used to push the changes from local workspace to the remote repo 
+ git push url branch_name
+ 
+ git fetch :- It will bring the changes from remote rpo to the local repo but it will stores in separate branch we can review the changes and merge if it is required
+ 
+ git fetch url
+ git merge 
+ 
+ 
+ **********************************************************************************
+ 
+ 09-12-2021
+ 
+ git log 
+ 
+ It is display history of repo 
+ 
+ git log file_name :- History of a file 
+ 
+ git log -2 :- history of latest 2 commits
+ 
+ git log commit_id :- History of specific commit
+ 
+ How to create personal access token go to settings of a git hub account click on developer settings and click on personal access token.
+click on generate new token, give any name and select no expression and also select all the check boxes click on save.
+Token will appear only for first time we need to store some where, so that we can use this token in future .
+
+Tag:- Tag is a name given to set of versions of files and directories, tag is easy to remember in future , It will indicate milestone of a project.
+(product is released to customer)
+
+git tag tag_name
+
+git tag:- list the taag
+
+git tag tag_name:-It will create the tag 
+
+git checkout tag_name :- It will used to switch to the specificc tag.
+
+
+git push --delete origin <tag_name> :- It will delete tag in remote repo
+
+git push origin <tag_name> : It will push the tag to the remote repo
+
+
+git tag -d tag_name :- It is used to delete the tag locally.
+
+
+**************************************************************************************
+Branch
+
+Branch is for parallel development if two people or two team will work on the same piece of code and we integrate by merging 
+
+git branch :- list the branches
+git branch branch_name :- It will create new branch from checkout branch
+git branch new_branch_name 0ld_branch_name :- It will create new branch from old branch
+git branch branch-name tagname :- It will create a branch from tag
+git branch -d <branch_name> :- It will delete a branch
+git checkout branch_name> :- switch to a branch
+git checkout -b <branch_name> :- It will create a new branch and swith to that branch automatically.
+git clone -b branch_name url :- It will used to clone the repo from the specific branch
+Merge
+ 
+how to merge the changes from develop to master
+1) git checkout master :- switch to a master branch
+2) git merge develop :- It will merge the changes from develop branch
+
+git Stash:- When i am working on one branch if i get any critical issue which need to be fixed on other branch before switching to other branch i need to stash incomplete work on current branch. Once I fix the bug in other branch, I switch back to the current branch and pop the stash entry to continue.
+
+this will avoid committing the code in wrong branch 
+
+ git stash :- It will add the changes to the stash 
+ git stash pop :- It will retrieve the changes from stash entry
+ git stash list :- It will list the stash entry 
+ git stash drop :- it will remove a stash entry from the list of stash 
+ 
+ merge conflict :- it will occure same line of code is moddified on two difrent branches on same file, when we tried to merges from this two branches we will get merge conflict.
+ 
+ how to resolve :- I dont know which changes should i consider i will check with developers who have modified the code on two different branches developer will discuss and give the new changes I will put this changes and continue with the merge.
+ 
+ git log <file> :- it will display who modified the file.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ **********************************************
+ https://github.com/sachinbm40/test_11_12.git
+ 
+ 11-12-2021
+ 
+ git branch -a :- It will display all branches 
+ git clone --bare url:- It will create duplicate (mirror of repository )
+ git push --mirror url:- It will push the duplicate repo to git hub
+ 
+ 
+ difference  between rebase and merrge 
+ 
+ merge is integrate the changes from one branch to another 
+ 
+ 
+ rebase is nothing but a merge one branch will get added to the tip of the another branch 
+ we can squash multiple commit as a single commit then we can merge.
+ while merging it doesn't allow any git operation until unless git conflict resolved.
+ 
+ git rebase <branch_name>
+ 
+ git rebase -i HEAD~<no of commit> (tilt)
+ 
+ git log --oneline
+ 
+ 
+ How do you merge specific change(commit) or two commits:
+ git cherry-pick <commit_id>
+ git cherry-pick <commit_id 1,commit id 2>
+ 
+ how do i know how many files are modified under one commit.
+ git show commit id 
+ 
+ gitReset :It is used to undo the committed changes but history will not track 
+ there will 3 types of reset 
+ 1)mixed:- It is used to move the files from stagging area back to the workspace
+ git reset --mixed commit_id
+ 2)soft:- It will remove the history and changes will move to the stagging area 
+ git reset --soft commit_id
+ 3)Hard:- there will be no clue that we have committed the changes, it will remove the history and changes from every where (git repo,stagging are workspace)
+ git reset --hard commit_id
+ 
+ git revert:- it is used to undo the committed changes but history will be tracked. ---- (previous commit copy we need)
+ git revert commit_id
+ git revert HEAD~1 (tilt)
+ 
+ reset and revert difference 
+ 
+ difference b/w GIT(distrubuted version control tool) and SVN(centralized version control tool 
+ 
+ git is a distrubuted version control tool the whole repo is there in local repo if i want to go to prvious version of a code i can get in local workspace it self.
+ 
+ SVN is centralized version control tool only latest version of code will be there in local workspace, if i want to go to the prvious version of a file i need to check out from central repo.
+ 
+ 2.
+ Git has advance future like reset,fetch,stash
+ in svn we dont have all this
+ 
+ 
+ How to give the write access  for repo, click on collaborators and teams type username and click on add. select the access which you need to give.
+ 
+ Branch used to create at development stage and tag used at release time.
+ 
+****************************************************************************
+ 
+ Explain Branching strategy (git flow fallowed in company)
+ 
+Branches can be created for multiple reason here we create branches for releases.
+
+We followed GitFlow as the branching strategy.Our Branching strategy has branches like , Feature branch , Dev branch , Master branch and Hotfix branches.
+
+
+Feature branch:- developers will create their own feature branch and merge it to the dev branch.
+Release branch:- used to maintain the releases.
+Hot fix branch:- we used these branches to deliver critical fix to the production environment.
+Master branch:- Would be the replica of production environment , Its always a clean branch.
+
+
+
+Development will be going on dev branch once the code is ready for first release on dev branch, 
+we create separate branch for first release, and we make release from release branch. 
+Whatever the issues related to first release will be fixed on first release branch. 
+Parallel development will be going on dev branch for second release. 
+Once the code is ready for second release on dev branch, before we create release2 branch we merge the first release to the dev branch and then we create release2 branch for second release. 
+Whatever the issues we have seen in first release will not be seen in second release.
+
+
+
+ 
+ Future Branch :- Dveloper will create there own future branch and merge into the dev branch 
+ 
+ Relese Branch :- Used to maintain releases 
+ 
+ hot fix Branch:- We have these branches to deliver critical fix in production environment.
+
+Master Branch :- Developer directly cant merge the source code master branch it is used to keep clean working code.
+
+dev branch :- use for devlopment respective develop branch 
+
+Note :- We support deployment to the QA, Dev, UAT, and production environment
+		To deploy to QA and UAT environment we need manger approval 
+		To deploy to prod environment we need SRE approval (site relabality approval) once we get the approval we will deploy to prod environment with the help of SRE team member and dev team member.
+
+Release Note :- It has two things 1 Tag names and known issues. Usualy devops engg will prepare Relese notes 
+
+hot fix or patch buid :- It is a critical fix which needs to be delivered to a customer with in few hours 
+						If i modified 5 files among 1000 files only 5 files will be complied and re generate the build it takes less time.
+
+
+Load Build :- Here we compile the source code from the scratch it takes more time.
+
+Build :- Binary or executable file before testing (converting source code into executable file) 
+
+release :- It is tested build ready to deliver to customer.
+
+ **********************************************************************************
+ 
+ Note 
+
+$0 name of the script 
+$1 first argumnet
+$* all arguments passed to the string.
+$# Total number of arguments passed to the script
+$@ All arguments passed to the string stored in arry format. $a{1},$a{2}
+$$ proceess id of the current running process.
+$! process id of last commmand went into the background (exmetery )
+$? used to print the status of last executed command, if previous command is succesfull it will dispaly 0 other wise it will diaply non 0 value.
+
+
+
+ 
+ 
+ 	Note(Have you written automation script or have you written any script)
+	
+	Yes I ahve Written 
+	To monitorn the diskspace if the space is reached maximum then it will send a mail notification to the concerned person
+	To Moinitor the services if it is stoped send mail notofofcation 
+	TO cleanup the script which will retain recent Builds and delete old builds
+	We have scheduled all the scripts in crontab
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Build
+ 
+ input for project :- source code 
+ output for project :- Binary or executable file.
+ 
+ using build tool we will generate the binary or executable file 
+ 
+ C, C++ project 
+ 
+ Build tool will be make
+ file .c .ccp
+ out put will be .exe file 
+ 
+ compiler c++ g++, 
+ 
+ 
+ Java source code .java build tool maven,ant,graden,node js, sbt output .jar .war .ear 
+ 
+ https://github.com/Urssharath/hello-world-war
+ 
+ wget use to download tge file 
+ wget url
+ 
+ tar :- it will used to zip and unzip 
+ 
+tar -cvf folder_name (zipthe folder)
+
+tar -xvf zipfolder :- extarct the zip file 
+
+curle :- Is used to download a file also used to upload a file. It ias also used display content of url.
+
+curle url
+curle -v url
+
+
+
+
+
+ 
+
+
+
+
+
+
+https://github.com/sachinbm40/hello-world-war
+
+
+
+clone from 
+git clone https://github.com/sachinbm40/hello-world-war
+
+sudo apt update
+sudo apt install maven
+mvn clean package 
+
+
+copy link address 
+https://downloads.apache.org/tomcat/tomcat-9/v9.0.56/bin/apache-tomcat-9.0.56.tar.gz
+
+sudo su -
+cd /opt
+
+wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.56/bin/apache-tomcat-9.0.56.tar.gz
+
+tar -xvvf apache-tomcat-9.0.56.tar.gz (unzip)
+
+ cd apache-tomcat-9.0.56/conf/
+ 
+ ls
+ 
+ vi server.xml
+ 
+ connector port to 8089
+ 
+ cd ..
+ cd bin
+ 
+./startup.sh 
+
+copy public ip 
+
+http://3.14.66.188:8089/
+
+
+<role rolename="manage-gui"/>
+<role rolename="manage-script"/>
+<role rolename="manage-jmx"/>
+<role rolename="manager-status"/>
+<user username="admin" password="admin" roles="manager gui, manager-script, manager-jmx, manager-status"/>
+<user username="deployer" password="deployer" roles="manager script"/>
+<user username="tomcat" password="s3cret" roles="manager-gui"/>
+
+
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+<user username="deployer" password="deployer" roles="manager-script"/>
+<user username="tomcat" password="s3cret" roles="manager-gui"/>
+
+
+

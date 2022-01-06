@@ -1,0 +1,877 @@
+instance id:- i-09ce12393f7511be5
+key pair:- agi
+
+ public 3.144.23.227
+ Private 172.31.10.174
+
+
+
+red hat :- ec2-user
+
+
+
+ Linux command 
+
+ 19-11-2021
+ 
+pwd :- present working dir it is user to see the present working directory
+
+ how to create empty files
+ using touch command
+ touch f1.txt
+ not mandatory to give extension.
+
+ 5 empty file
+
+ touch f2 f3 f4 f6
+
+clear command:- clear
+
+how to list files and folder in current dir
+> ls
+
+>ls -l(list the file in long list)
+
+>ls -lt(list the recently created files at the top)
+
+>ls -lrt (display recent created at button)
+
+>ls -a (list all files and directories including hidden files and directories )
+
+>ls /home/ubantu/newfolder1/ (display specific path files)
+
+>create path
+mkdir -p /directory name/:- (-p indicates parents directory, it will check dir is exist or not if its exist it will come out otherwise it will create new directory)(it will not over right it will come out).
+
+display conent of file
+cat <file_name>
+
+display content of file which is in different path
+cat <complete_path)
+
+edit file
+vi <file_name>
+:- press i type the command and save and exit
+
+esc:q! :- to quit
+esc:wq! :- write and quit (save and quit)
+esc dd:- it will delete a line(should move courser in specific line).
+esc 2,4 dd:-remove lines in range
+
+esc/<patran>:- it will search patern in file
+esc:set nu:-set the line number
+esc :set nonu:- un set the line numbers
+
+remove file
+rm file_name
+
+delete directory
+rm -rf <folder_name> :- (-r recursive f forcefully).
+
+*****************************************************************************************************
+
+20-11-2021
+
+File permission
+
+d directory 
+- file
+l link 
+
+
+dev=> aaa(creates a file)
+	  bbb (group from same team)
+test=>ccc (others)
+	  ddd (others)
+
+1st user 
+	  
+2nd group
+
+3rd others
+
+
+
+r-> read(4)
+w-> write(2)	  
+x->execute(1)
+- => absent(0)
+
+u -> user
+g -> group
+o -> others
+
+* chmod it is used to change the permission of the file or directory 
+
+Example 	 
+
+
+I need to give a permission all for user, read,read and execute for group, and read for others for a file 1.txt?
+
+chmod 754 1.txt
+
+
+Read,write for user r for group rw others directory name is devops 
+
+chmod -R 646 devops
+
+ 
+Chmod i need to 
+
+chmod o+w file.txt (change ownership only others as a write)
+
+chmod g+x,0-x file.txt (change ownership to g as execute and remove write ownership from others)
+
+******************
+
+copy a file
+
+cp:- it is used to copy a file from source to destination 
+
+cp <source_file_path> <destination_path>
+ex:- cp /home/ubantu/file1.txt /home/ubantu/newfolder1/
+
+cp -R <source_file_path> <destination_path>
+cp -R /home/ubantu/new1/ /home/ubantu/newfolder1/
+
+***************
+Change directory 
+cd :- it is used to switch to specific directory
+cd <directory_name> :- It will move inside directory
+
+cd .. :- It will come out of a directory
+
+cd ../.. :- it will come out of a 2 directory
+
+inside new 2 come back 1 folder move to 
+cd ../
+
+cd /home/ubuntu/new1/new2
+
+******************
+
+
+rename a file 
+mv 
+
+it is used re name a file or directory also used to move the file or directory from source to destination
+
+Syntax:- mv <old_file_name> <new_file_name>
+mv s1 s2
+
+directory (-R not required it is recursive)
+Syntax:- mv <old_dir_name(including_pat)> <new_dir_name(including_pat)>
+mv folder1 folder2: It will rename a directory
+
+mv folder3 folder2/ (folder3 will go inside folder2 , move dir folder to destination)
+
+
+*************************************************************************************
+21-11-2021
+
+
+head:- 
+
+It is used to display first n lines of a file
+
+head <file_name>:-display 10 line of file defalt 
+
+head -5 <file_name> :- display first 5 lines of a file.
+
+head -7 <file_name> :- display first 7 lines of a file.
+
+********
+
+tail
+
+It is used to display last n lines of a file.
+
+ex:-
+
+tail <file_name>:- display last 10 lines of a file.
+
+tail -1 file name:- display last line of a file.
+
+tail -5 <file_name>:- display last 5 line
+
+********
+
+WC (word count)
+
+It is used to count number of lines,words,characters in a file.
+
+wc <file_name>:-number of line, words, total number of char(including space)
+wc f2
+
+
+
+wc -l <file_name>:total number lines in a file.
+
+wc -w <file_name>:total number words in a file.
+
+wc -c <file_name>:total number characters in a file.
+
+15 
+lines,words,characters
+
+
+wc -c <file_name> > 
+
+
+out to write the output of command 1 command to a file.
+
+using Redirect & append 
+
+
+********
+
+Redirect (>)
+
+It is used to write the output of one command to the another file.If the file already exist it will overwrite. 
+
+head -5 <file_name> > filename
+
+ls -lt > filename
+
+********
+
+Append (>>)
+
+It is Used to append the output of a command at the end of a file.
+
+head -5 <file_name> >> filename
+ls -lt >> filename
+
+********
+
+Pipe line
+
+It is used to pass the output of a command to as an input to the next command 
+
+ex :- to display fifth line a file 
+
+head -5 <file_name> | tail -1
+
+how to display line 6 to line 11
+
+head -11 <file_name> | tail -6
+
+how to count the number of character in 11th line of a file 
+
+head -l1 file_name | tail -1 | wc -c
+
+
+how count number of words in 14th line 
+
+head -l4 file_name | tail -1 | wc -w
+
+13th and 14th 
+
+
+how to count number of words in 16th line of a file and store the output in a new file 
+
+head -l6 file_name | tail -1 | wc -w > word.txt
+
+*****
+
+echo :- used to print the statement 
+
+if we use \n use -e 
+
+echo "welcome to devops"
+welcome to devops
+
+echo -e "hi /n welcome to devops"
+hi
+welcome to devops
+
+
+****
+hostname used to display the server name
+
+syntax:-hostname
+
+ip 172.31.10.174
+
+
+
+*******************************************************************************************
+
+
+
+cut it is used to cut the file in column wise
+
+ex:- cut -d " " -f1 <file_name>
+
+-d :- delimiter 
+-f1:- it will display the first column 
+
+cut -d " " -f1,3 <file_name> :- it will display first column and 3rd column 
+
+cut -d " " -f1-3 <file_name> :- it will display first to 3rd column 
+
+*********
+
+grep 
+
+It is used to search a pattern in a file. It will display a line which contain a pattern.
+
+grep pattern_name <file_name>
+
+ex:-grep pattern <file_name> :- it will display a line which contain a pattern , it is case sensitive.
+
+grep -i pattern file_name :- it is case in sensitiveness 
+
+
+grep -i -w pattern <file_name> :- it is search for specific word in a file.
+
+grep -i -c pattern <file_name> :- it will count number of lines contain a pattern .
+
+
+grep -i ^$ file_name :- it will display the empty lines
+grep -i -c ^$ <file_name>:-It will count the number of empty lines.
+
+***
+
+grep -R -i pattern * - it will search a pattern in a current directory as well as in sub directories
+
+grep -l -i pattern * :- It will list the files which contain a specific pattern 
+
+
+grep -v pattern file_name :- It will display a lines will dosnot conatin a pattern .
+
+grep -e pattern -e pattern1 file_name :- it will search a multiple patterns 
+
+
+grep -i ^the file_name:-print the lines which start with the pattern the 
+
+grep -i this$ file_name:- print the lines which end with pattern character end with this
+
+grep -i -n pattern file_name :- print the line numbers and line which contain a specific pattern
+
+
+*************
+
+awk :- It is used to cut the files in row as well as column wise.
+
+
+awk -F " " '{print $1}' <file_name> It will print the first column
+
+awk -F " " '{print $NF}' <file_name> :- it will print the last column 
+
+awk -F " " '{print $(NF-1)}' <file name> :- it will print the last but first column
+
+
+awk -F " " '{print $(NF-3)}' <file name> :- It will print the last but 3rd column 
+
+awk -F " " '{print $0 }' <file_name:- it will print the all column 
+
+
+awk -F " " 'NR==4 {print $4}' f2 :- It will display fourth row fourth column
+
+awk -F " " 'NR>1 {print $1}' f2 :- it will print from second row and first column of the all the row
+ 
+NR==4,NR==10
+
+NR==4;NR==10
+
+ 
+**************************************************************************************************************************
+23-11-2021
+
+
+sed(strean editor)
+
+It will be used to replace a pattern by another pattern in a file.Also used to print the specific number of lines and delete the lines from a file.
+
+
+Example :- sed 's/append/redirect/g' file_name :- it will replace a staring only in a console not in a file 
+
+s indicates substitute 
+g global (multiple patterns in line)
+
+s replace all the pattern in all the lines of the file
+
+1s replace 1st line of the file 
+
+5th line 
+
+5,10s :- 5th to 10th line of the file
+
+
+sed -i '5,10s/append/redirect/Ig' file_name:- It will replace a pattern from 5th to 10th line in a file.
+
+i :- replace patter in a file 
+
+I cases insensitive 
+
+
+
+I need to replace a pattern append by redirect in last line of a file.
+
+
+sed -i '$s/append/redirect/Ig' file_name
+
+
+sed -i 's/pattern//g' file_name :- Delete a word in file 
+
+mention 1 instead of g it will replace first pattern  
+
+mention 2 instead of g it will replace second pattern  
+
+
+sed -i 's/append/redirect/2' file_name
+
+
+how to delete a line 
+sed -i '1d' file_name
+
+sed -i '2d' file_name :- it will delete the second line.
+
+sed -i '2,5d' file_name:- it will delete a line second to 5th line.
+
+sed -i '2d;5d' file_name :- delete the second and 5th line of the file.
+
+sed -i '/pattern/d' file_name :- it will delete a line which contain a pattern.
+
+sed -i '$d' :- delete last line
+
+
+
+How to print the lines 
+
+sed -n '1p' file_name :- It will print the 1st line
+
+sed -n '1p;3p' file_name :- print line 1st and 3rd
+
+sed -n '1,3p' file_name :- print line from 1st to 3rd
+
+sed -n '$p' file_name :- print last line of file.
+
+
+**********
+sudo 
+
+sudo (super user dose)  :- It is used to run the commands with root permission 
+
+sudo mkdir -p /root/file
+
+su (super user):- switch user It is used to login as another user or root user
+su - user_name :- It is used to switch as another user 
+sudo su - :-It is used to login as root user
+
+******************
+chown
+
+chown (change ownership):- It is used to change the ownership (user_name and group_name) 
+
+chown user_name:group_name file_name 
+
+chown -R user_name:group_name directory_name 
+
+ 
+ 
+ **********************************************************************************************************
+ 24/11/2021
+ 
+ find
+ 
+ it is used to find the location of a file 
+ . :- it will search in a present directory 
+ / :- It will search in a hole system.
+ path :- It will search in a specified path.
+ 
+ 
+ example
+ 
+ find . -iname new1 :- it will display both the directory and file with the name new one.
+ 
+ find . -type f -iname new1:-It will display only the files with the new1
+ 
+ find . -type d -iname new1:-It will display only the directories with the new1
+ 
+ f:-file
+ d:-directories
+ -i:-case insensitive
+ 
+ list the file which is modified 3 months ago 
+ find . -type f -mtime +90
+ 
+ find the files which are modifed 2 days ago
+ find . -type f -mtime +2
+ 
+ find the location of a directory which are modified with in 3 days
+ 
+ find . -type d -mtime -3
+
+find the locaation of the file which are 20 minutes ago 
+find . -type f -mmin +20
+
+list the files which are modified with in 10 min  
+
+find . -type f -mmin -10
+
+
+list the files which are the permission 0664 
+
+find . -type f -perm 0664
+
+
+how to restrict the find command to search in a current directory 
+
+find . -maxdepth 1 -type f -perm 0664
+
+find . -maxdepth 2 -type f -perm 0664 :- second level of folder 
+
+how do find(list) empty files 
+
+find . -type f -empty
+
+
+how do you list non empty files 
+
+find . -type f ! -size 0
+
+list the files which are having size more than 2 mb
+
+find . -type f -size 2
+
+
+find the files with the name 1.txt and delete all the files 
+
+find . -type f -iname 1.txt | xargs rm -rf
+
+find the files which are modified 3 months ago and delete 
+
+find . -type f -mtime +90 | xargs rm -rf 
+
+
+find the files which are modified with in 3 months and 2 months back 
+
+find . -type f -mtime -90 ! -mtime -60 
+
+
+
+********************************************************************************
+
+link 
+
+
+link is a short cut to a file 
+
+2 type of link 
+soft link (symboloc link):- It is a short cut of a file if we delete the original file soft link will not working
+
+ln -s file_name link name
+
+hard link 
+it is short cut to a file if we delete actual file then also hard link will work fine. Because it points to the high node of a file (high node is memory address)
+ 
+ln file_name link_name
+
+****************************************************************************************************************************************************
+
+25-11-2021
+
+ps (process status)
+
+ps -ef
+
+it is a command used to check current running process in a background on a server.
+
+ps -ef 
+
+
+how do you check specific process running or not.
+
+ps -ef | grep -i <process_name>
+
+or
+
+ps -C <process_name>
+
+
+how do you list process started by specific user 
+
+ ps -ef | grep <username>
+
+
+*********
+kill
+
+kill is used to stop the process forcefully 
+
+kill -9 <process_id>
+
+
+
+************
+
+grace full start/stop
+
+sudo service <service_name> start :- Used to start the service 
+
+ex:- sudo service jenkins start
+
+sudo service service_name stop 
+
+sudo service service_name restart
+
+
+forcefully  
+
+sudo systemctl start <service_name> :- start a service.
+
+sudo systemctl stop <service_name> :- start a service.
+
+sudo systemctl restart <service_name> :- start a service.
+
+sudo systemctl status <service_name> :- start a service.
+
+**************************
+
+how do you login to a remote
+
+ssh user_name@server_name 
+
+
+************
+how to connect from one server to another using pem file
+
+ssh -i pem_file user_name@server_name
+
+
+
+***************
+scp 
+
+scp path_of_a_file user_name@server_name:path_of_destination :- It is used to copy a file from source server to destination_server
+
+
+scp user_name@server_name:path_of_a_file destination_path :- we need to execute in destination server.
+
+ex
+
+scp file_1 ubuntu@Private_ip:/home/ubantu/  :- execute in source copy file
+
+
+scp -r file_1 ubuntu@Private_ip:/home/ubantu/  :- execute in source copy dir
+
+
+difference b/w scp and rsync
+
+scp is used to file from one server to another server where as              rsync used to copy file from one server to another server and also used to copy 	
+																			with in a server 
+
+
+while copying a file from one server to another server if copying stops in b/w due to some n/w issue once n/w is back if i use scp command it will start
+ copying from beginning where as                                             rsync will start copying from where it was stoped.
+
+
+************
+
+Note:- how to install the package rsync 
+
+for ubuntu server :- apt install rsync <package_name>
+for ubuntu and centos :yum install rsync
+
+
+how to remove the package rsync 
+
+for ubuntu server :- apt remove rsync <package_name>
+for ubuntu and centos :yum remove rsync
+
+********************
+
+port number 
+
+1 ssh :22
+2 scp :22
+3 telnet : 23
+4 http :80
+5 https :443
+6 dns :53
+
+
+  
+netstat 
+
+It is used to see the available ports and used ports on the server 
+
+ netstat -a :- listening and opening ports
+ netstat -at :- tcp ports
+ netstat -u :- udp port
+ netstat -l :listening ports(used ports)
+ netstat -lt : listening tcp port 
+ netstat -lu :- listening udp port
+ 
+ 
+ how to check whether a specific port open or not 
+ 
+ netstat -tulpn | grep port_number
+ 
+ netsat -ntlpu (how many ports are used)
+ 
+
+ netstat -at tcp port 	
+ 
+ netstat -at udp port
+ 
+ 
+ telnet
+ 
+ find the port number of remote server
+ 
+ 
+ 
+ ubantu t2micro
+ 
+ 
+ password less connection from one server to another server 
+ 
+ in server one generate a public and private key using ssh-keygen cmd and copy a public and private key go to server_2 paste the public and private key to authorized_key file under .ssh folder next 
+ time we will logging in without password.
+
+ 
+ 
+
+ ******************************
+ 
+ 
+server 1 :-172.31.10.174
+server 2 :-172.31.35.140
+
+ 
+ 
+ssh-rsaAAAAB3NzaC1yc2EAAAADAQABAAABgQDOLeOFxJ4aG1JuNOq/caaBnm9HgtsT+50huQWD8Q/wPSFitvnQUT4QX/5Jja+4WyyaGINGJaf6VXgUg16JUaCpWKm6hXwAlVFB7roZVFCtnOCA6hmhGhwlYsQUCaZfgyiqudUR8/Jcm3/+4fVPZxXh7iLHyrjruLHAx9LWxmjQNC/zya2s9LTkdWYK14j2M2uLAtqYxHHRDM1Oc/uCorNIY4zLAtoREOo6rM7J6j4Ufs8dIGuhTitxNMoRpdjx7AiU9vr5GyCM33rrLoKCSLCkkgyuqHF2OyRG5z3N7JT48VM3YGLfqaoHx2KvLkeE64/flYazm3jjNZj+xa4QiNvUq0TyEWecQKlr1XhxW4Y1UAEGxxMe/ClQSJ19lStmKFynk4uK6XR2oLYE+Xs+6txprdt9/sC/VTbOwVhYDnZ/Rqio8BqdlNqfeaPF9eZBCY/1jYrFxAfxby3e55emCyq4/pKPTFOlu/xCVfCj31LGqZkAQUfv+DJxboLrt57l7WE= root@ip-172-31-10-174
+
+
+
+
+
+********************************
+
+26/11/2021
+
+du 
+
+disk usage :- it is used to display the size of a file 
+du -sh file_name or <directory_name>
+
+s size
+h human readalbe format 
+du disk usage 
+
+du -sh file_name or <directory_name>
+
+du -sh * :- it will display the size of all the files and directories in a current directory 
+
+
+df (disk free) :- It is used to display the size of the drives.
+
+df -h:- size of all the drives of a system
+
+df -h . :-display the size of the current drive.
+
+free :- It is used to display the size of the system memory(ram memory).
+
+free :- disply in bytes 
+
+free -m :- display in mb'
+free -g :- disply in gb 
+
+
+how do you check which process is taking more cpu usage 
+
+using top command 
+
+
+ 
+how do you check from how long server is up and running
+ 
+using up time 
+ 
+up time :- it is used to display the load avg for the past one mintue , 5 minutes , 15 minutes respectively 
+
+it will display 0 for low load and one for full load.
+
+
+
+
+how do you check other servers are up and running  
+using 
+ping server_name 
+ 
+ 
+ how do you run the command in background 
+
+ 
+ 
+ use & symbol at the end of the command 
+ 
+ 
+ 
+ 
+ date '+%a' (Fri)
+ date '+%A' (Friday)
+  
+ date '+%d' (26)
+ date '+%D' (11/26/2021)
+
+ date '+%m' (11) month 
+ date '+%M' (23) minute
+ 
+ date '+%h' (Nov)
+ 
+ date '+%H' (02):- hour
+ 
+ date '+%S' (23):- second
+ 
+ date '+%T' (23):- current time
+ 
+ 
+ 
+ nohup (no hang up):- while running the script if execution is stooped due to some n/w issue once n/w is back it resumes the execution from where it was stooped,   
+ 
+ 
+ run ls in bg
+ 
+ nohup ls &
+ 
+ 
+ telnet
+ 
+find the port number of remote server
+ 
+
+ It is used to break the firewall(security). 
+
+
+telnet ip_addrees:port_number
+
+
+sort command 
+
+sort file name
+sort -r file_name
+
+sort -n file_name
+
+sort -nf file_name
+
+sort -u file_name(remove duplicate lines and display )
+
+ 
+ 
+ 
+ 172.31.35.140
+ 
+ 
+ 
+ end 
+ home + backspace
+ 
+ 
+ *************************
+ 
+ 
